@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="form">
+      <input type="file" id="tempFile" name="icon" onchange="uploadImg(this)" />
+      <img src="" id="tempImg" alt="" />
+      <p>上传图片</p>
+    </form>
+    <script>
+      // 预览图片, obj即dom对象
+      const uploadImg = obj => {
+        // file: 上传的图片对象 -> { size: 66000, name: '2.png', type: 'image/png'}
+        const file = obj.files[0];
+        // 使用FileReader读取文件
+        const reader = new FileReader();
+        // 读取文件的过程是异步的
+        reader.onloadstart = function(e) {
+          console.log("开始读取....");
+        };
+        reader.onprogress = function(e) {
+          console.log("正在读取中....");
+        };
+        reader.onabort = function(e) {
+          console.log("中断读取....");
+        };
+        reader.onerror = function(e) {
+          console.log("读取异常....");
+        };
+        reader.onload = function(e) {
+          console.log("读取成功");
+          // 读取成功之后, 如果是图片, 则result是base64
+          var tempImg = document.getElementById("tempImg");
+          // //将解析的base64字符串赋值给img标签
+          tempImg.src = this.result;
+          // 这里需要异步获取，避免线程延迟
+          setTimeout(function() {
+            console.log(
+              "高度" + tempImg.offsetHeight + "宽度" + tempImg.offsetWidth
+            );
+          }, 1000);
+        };
+        // 开始读取
+        reader.readAsDataURL(file);
+      };
+    </script>
+  </body>
+</html>
