@@ -8,10 +8,6 @@
 
 ```js
     <InputItem
-        placeholder="请输入您的姓名"
-        maxLength={10}
-        onChange={(val) => this.handleName(val) }
-        onBlur={() => this.handleCloseInput()}
         // : input上添加onTouchTap事件, 在时间上绑定focus事件
         ref={ int => this.int = int}
         onTouchTap={ () => this.int.focus() }
@@ -22,14 +18,8 @@
 
 ```js
     <InputItem
-        placeholder="请输入您的姓名"
-        maxLength={10}
-        onChange={(val) => this.handleName(val) }
         // 手动在失焦时归位, 这样Date-Pick就可以使用
         onBlur={() => window.scrollTo(0, 0);}
-        // : input上添加onTouchTap事件, 在时间上绑定focus事件
-        ref={ int => this.int = int}
-        onTouchTap={ () => this.int.focus() }
     ></InputItem>
 ```
 
