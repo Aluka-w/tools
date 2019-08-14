@@ -28,3 +28,11 @@
 1. flex布局, 或者引用了`100vh`这种布局, 在唤出手机键盘时, 会出现页面压缩的情况
 
     1. 解决方案, js动态计算页面高度, 并设置页面高度, 就能解决
+```js
+    componentDidMount () {
+        let clientH = document.documentElement.clientHeight;
+        let El = document.getElementsByClassName('login-wrapper')[0];
+        El.style.height = `${clientH}px`;
+        // Actions.getBaseInfo();
+    } 
+```
