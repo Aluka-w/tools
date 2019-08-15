@@ -23,6 +23,26 @@
     ></InputItem>
 ```
 
+4. IOS下input或者textarea标签无法输入的问题
+
+    ~ 在input的父类加上-webkit-user-select:text !important;
+    
+5. IOS或部分Android下唤出弹出框, 弹出框底下页面还能被滑动
+
+ ```js
+    // 打开弹窗时
+    let bodyEl = document.body;
+    let top = window.scrollY;
+    bodyEl.style.position = 'fixed';
+    bodyEl.style.top = -top + 'px';
+    this.setState({ showModel: true, scrollTop: top })
+    // 关闭弹窗时
+    let bodyEl = document.body;
+    bodyEl.style.position = '';
+    bodyEl.style.top = '';
+    window.scrollTo(0, this.state.scrollTop);
+ ```
+
 ## Android下
 
 1. flex布局, 或者引用了`100vh`这种布局, 在唤出手机键盘时, 会出现页面压缩的情况
