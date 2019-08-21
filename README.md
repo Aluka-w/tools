@@ -66,18 +66,7 @@
     preload = () => {
         let imgs = [
             "../static/img/dry.png",
-            "../static/img/dry-icon.png",
-            "../static/img/sensitive.png",
-            "../static/img/sensitive-icon.png",
-            "../static/img/pigment.png",
-            "../static/img/pigment-icon.png",
-            "../static/img/tight.png",
-            "../static/img/tight-icon.png",
-            "../static/img/transition-bg.png",
-            "../static/img/select.png",
-            "../static/img/4bg.png",
-            "../static/img/test-banner.png",
-            "../static/img/logo.png",
+            "../static/img/dry-icon.png"
         ]
         for (let img of imgs) {
             let image = new Image()
