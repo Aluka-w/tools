@@ -56,3 +56,37 @@
         // Actions.getBaseInfo();
     } 
 ```
+
+## 通用
+
+1. 图片预加载的方法, 在页面最开始时, 把所有图片预加载一次, 使得浏览器提前缓存相应图片
+
+```js
+    // 预加载所有的图片, 可放于componentDid
+    preload = () => {
+        let imgs = [
+            "../static/img/dry.png",
+            "../static/img/dry-icon.png",
+            "../static/img/sensitive.png",
+            "../static/img/sensitive-icon.png",
+            "../static/img/pigment.png",
+            "../static/img/pigment-icon.png",
+            "../static/img/tight.png",
+            "../static/img/tight-icon.png",
+            "../static/img/transition-bg.png",
+            "../static/img/select.png",
+            "../static/img/4bg.png",
+            "../static/img/test-banner.png",
+            "../static/img/logo.png",
+        ]
+        for (let img of imgs) {
+            let image = new Image()
+            image.src = img
+            image.onload = () => {
+                // console.log(image);
+            }
+        }
+    }
+```
+
+
