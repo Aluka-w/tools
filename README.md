@@ -26,7 +26,7 @@
 4. IOS下input或者textarea标签无法输入的问题
 
     ~ 在input的父类加上-webkit-user-select:text !important;
-    
+
 5. IOS或部分Android下唤出弹出框, 弹出框底下页面还能被滑动
 
  ```js
@@ -48,13 +48,14 @@
 1. flex布局, 或者引用了`100vh`这种布局, 在唤出手机键盘时, 会出现页面压缩的情况
 
     1. 解决方案, js动态计算页面高度, 并设置页面高度, 就能解决
+
 ```js
     componentDidMount () {
         let clientH = document.documentElement.clientHeight;
         let El = document.getElementsByClassName('login-wrapper')[0];
         El.style.height = `${clientH}px`;
         // Actions.getBaseInfo();
-    } 
+    }
 ```
 
 ## 通用
@@ -78,4 +79,35 @@
     }
 ```
 
+## 验证码问题
 
+1. 通过布局, 使得6个横岗放在input下方
+
+2. input聚焦, 则横岗生成模拟的光标(隐藏原光标), 失焦则消失
+
+3. 根据input的值, 渲染横岗的值, 且根据值的多少, 横岗背景色也会变化
+
+```jsx
+    <div className="mine-phone-code">
+        <InputItem
+            type="number"
+            placeholder="请输入验证码"
+            disabled={checkCodeIng}
+            onChange={this.handleChange}
+            value={checkCode}
+            onFocus={() => this.handleHaveFocus(true)}
+            onBlur={() => this.handleHaveFocus(false)}
+            ref={el => this.inputRef = el}
+            maxLength={6}/>
+        <span>验证码已发送{count}s</span>
+        <div className="mine-phone-mask">
+            {
+            [0, 1, 2, 3, 4, 5].map(ele => (
+                <span key={ele} className={haveFocus && checkCode.length > ele ? 'active':''}>
+                <i className={haveFocus && checkCode.length === ele ? 'active-code':''}>{checkCode[ele] || ''}</i>
+                </span>
+            ))
+            }
+        </div>
+    </div>
+```
