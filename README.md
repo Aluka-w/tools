@@ -87,6 +87,15 @@
 
 3. 根据input的值, 渲染横岗的值, 且根据值的多少, 横岗背景色也会变化
 
+4. 值得注意的是, 让input光标消失需要在input的css上
+
+```css
+   caret-color: transparent;
+   color: transparent;
+   text-indent: -999em;
+   margin-left: -50%;
+```
+
 ```jsx
     <div className="mine-phone-code">
         <InputItem
