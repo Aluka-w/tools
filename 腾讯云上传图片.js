@@ -4,6 +4,7 @@ const appId = 31318;
 
 import React, { Component } from "react";
 import lrz from 'lrz';
+import { uploadFileToTencent } from './api/index';
 
 class Image extends Component {
   constructor (props) {
@@ -35,6 +36,7 @@ class Image extends Component {
     formData.append('appId', appId)
     formData.append('domain', 'skintest.hetyj.com')
     formData.append('file', newFile)
+    // 
     uploadFileToTencent({
       data: formData,
       config: {
