@@ -22,6 +22,31 @@
         onBlur={() => window.scrollTo(0, 0);}
     ></InputItem>
 ```
+补充: 
+问题详情描述：
+
+     输入内容，软键盘弹出，页面内容整体上移，但是键盘收起，页面内容不下滑
+
+出现原因分析：
+
+    固定定位的元素 在元素内 input 框聚焦的时候 弹出的软键盘占位 失去焦点的时候软键盘消失 但是还是占位的 导致input框不能再次输入 在失去焦点的时候给一个事件
+
+解决办法：
+
+```js
+    <input onBlur={this.handleChange}/>
+    
+    handleChange = () => {
+        let u = navigator.userAgent, app = navigator.appVersion;
+        let isIOS = !!u.match(/(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if(isIOS){
+            setTimeout(() => {
+                const scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0
+                 window.scrollTo(0, Math.max(scrollHeight - 1, 0))
+            }, 200)
+       }
+    }
+```
 
 4. IOS下input或者textarea标签无法输入的问题
 
@@ -42,6 +67,35 @@
     bodyEl.style.top = '';
     window.scrollTo(0, this.state.scrollTop);
  ```
+ 
+ 6. ios端兼容input光标高度
+ 
+    问题详情描述：
+ 
+        input输入框光标，在安卓手机上显示没有问题，但是在苹果手机上
+
+        当点击输入的时候，光标的高度和父盒子的高度一样。例如下图，左图是正常所期待的输入框光标，右边是ios的input光标
+    
+     出现原因分析：
+ 
+         通常我们习惯用height属性设置行间的高度和line-height属性设置行间的距离（行高），当点击输入的时候，光标的高度就自动和父盒子的高度一样了。（谷歌浏览器的设计原则，还有一种可能就是当没有内容的时候光标的高度等于input的line-height的值，当有内容时，光标从input的顶端到文字的底部
+
+    解决办法：高度height和行高line-height内容用padding撑开
+    
+ 7. ios端微信h5页面上下滑动时卡顿、页面缺失
+ 
+    问题详情描述：在ios端，上下滑动页面时，如果页面高度超出了一屏，就会出现明显的卡顿，页面有部分内容显示不全的情况，例如下图，右图是正常页面，边是ios上下滑动后，卡顿
+    
+    出现原因分析：
+
+        笼统说微信浏览器的内核，Android上面是使用自带的WebKit内核，iOS里面由于苹果的原因，使用了自带的Safari内核，Safari对于overflow-scrolling用了原生控件来实现。对于有-webkit-overflow-scrolling的网页，会创建一个UIScrollView，提供子layer给渲染模块使用。【有待考证】
+      
+```css
+    // 公共样式新增
+    *{
+      -webkit-overflow-scrolling: touch;
+    }
+```
 
 ## Android下
 
