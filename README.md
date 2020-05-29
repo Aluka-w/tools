@@ -176,6 +176,8 @@
 ```
 
 ## 常见验证
+
+```js
 /**
  * 邮箱
  * @param {*} s
@@ -1215,4 +1217,4 @@ utils.arrChunk = (data=[],space=5) => {
     return {data:result,total:data.length,space};
 }
 
-
+```
